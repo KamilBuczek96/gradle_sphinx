@@ -1,0 +1,22 @@
+plugins {
+    id 'groovy'
+}
+
+apply plugin: com.kamilbuczek.plugin.docker.DockerPlugin
+
+import com.kamilbuczek.plugin.docker.DockerBuildTask
+import org.gradle.api.file.RegularFileProperty
+
+tasks.register('localBuildDocker', DockerBuildTask){
+    // do not need to override default values
+    dockerfile = new File("${projectDir}/docker/Dockerfile")
+    context = new File("${projectDir}/docker")
+    doLast{
+        //println("${projectDir.getClass()}")
+    }
+}
+
+dockerConfig {
+    dockerfile = new File("${projectDir}/docker/Dockerfileconfig")
+    context = new File("${projectDir}/docker")
+}
